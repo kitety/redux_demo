@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { increment, decrement } from './actions'
+//decrement increment 是函数
 
 class App extends Component {
   render() {
+    const { dispatch } = this.props;
+    // const dispatch=this.props.dispatch
+    console.dir(this.props);
     return (
       <div className="container">
         <h1 className="jumpbotron-heading text-center">{this.props.counter}</h1>
         <h1 className="jumpbotron-heading text-center">{this.props.name}</h1>
         <p className="text-center">
-          <button className="btn btn-primary mr-2">Increase</button>
-          <button className="btn btn-danger my-2">Decrease</button>
+          <button onClick={() => dispatch(increment({ id: 1, name: 'hello' }))} className="btn btn-primary mr-2">Increase</button>
+          <button onClick={() => dispatch(decrement({ id: 1, name: 'alex' }))} className="btn btn-danger my-2">Decrease</button>
         </p>
       </div>
     );
@@ -21,19 +25,20 @@ class App extends Component {
 // state 在这里代表了store.getState()
 // 这是个函数
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     counter: state.counter,
     name: state.user,
   }
 }
-App.propTypes={
-  counter:PropTypes.number.isRequired
+App.propTypes = {
+  counter: PropTypes.number.isRequired
 
 }
 export default connect(mapStateToProps)(App);
-
-
+//之前的
+//<button onClick={() => dispatch({ type: "DECREMENT" })} className="btn btn-danger my-2">Decrease</button>
+/////////////6
 // ---redux版本---
 // class App extends Component {
 //   render() {
