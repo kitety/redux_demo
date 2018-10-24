@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     // 声明了mapDispatchToProps,在this.props中就取不到了
     // console.dir(this.props)
-    const { incrementF, decrementF } = this.props;
+    const { increment, decrement } = this.props;
 
     // const { dispatch } = this.props;
     // const dispatch=this.props.dispatch
@@ -18,8 +18,8 @@ class App extends Component {
         <h1 className="jumpbotron-heading text-center">{this.props.counter}</h1>
         <h1 className="jumpbotron-heading text-center">{this.props.name}</h1>
         <p className="text-center">
-          <button onClick={() => incrementF('增加')} className="btn btn-primary mr-2">Increase</button>
-          <button onClick={() => decrementF('减少')} className="btn btn-danger my-2">Decrease</button>
+          <button onClick={() => increment('增加')} className="btn btn-primary mr-2">Increase</button>
+          <button onClick={() => decrement('减少')} className="btn btn-danger my-2">Decrease</button>
         </p>
       </div>
     );
@@ -51,19 +51,27 @@ const mapStateToProps = (state) => {
 //     }
 //   }
 // }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    incrementF: bindActionCreators(increment, dispatch),
-    decrementF: bindActionCreators(decrement, dispatch),
-  }
-}
+/**
+ *  incrementF: bindActionCreators(increment, dispatch)
+ * incrementF: (name) => {
+ *       dispatch(increment(name))
+ *     }
+ */
+// 传给下一个组件 推荐
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     incrementF: bindActionCreators(increment, dispatch),
+//     decrementF: bindActionCreators(decrement, dispatch),
+//   }
+// }
 // const mapDispatchToProps = (dispatch) => {
 //   return  bindActionCreators({increment},dispatch),
 // }
 App.propTypes = {
   counter: PropTypes.number.isRequired
 }
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// 本组件直接使用
+export default connect(mapStateToProps, { increment, decrement})(App);
 //之前的
 //<button onClick={() => dispatch({ type: "DECREMENT" })} className="btn btn-danger my-2">Decrease</button>
 /////////////6
