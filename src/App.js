@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { increment, decrement } from './actions'
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 //decrement increment 是函数
 
 class App extends Component {
@@ -18,8 +18,8 @@ class App extends Component {
         <h1 className="jumpbotron-heading text-center">{this.props.counter}</h1>
         <h1 className="jumpbotron-heading text-center">{this.props.name}</h1>
         <p className="text-center">
-          <button onClick={() => increment('增加')} className="btn btn-primary mr-2">Increase</button>
-          <button onClick={() => decrement('减少')} className="btn btn-danger my-2">Decrease</button>
+          <button onClick={() => increment()} className="btn btn-primary mr-2">Increase</button>
+          <button onClick={() => decrement()} className="btn btn-danger my-2">Decrease</button>
         </p>
       </div>
     );
@@ -68,10 +68,12 @@ const mapStateToProps = (state) => {
 //   return  bindActionCreators({increment},dispatch),
 // }
 App.propTypes = {
-  counter: PropTypes.number.isRequired
+  counter: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired
 }
 // 本组件直接使用
-export default connect(mapStateToProps, { increment, decrement})(App);
+export default connect(mapStateToProps, { increment, decrement })(App);
 //之前的
 //<button onClick={() => dispatch({ type: "DECREMENT" })} className="btn btn-danger my-2">Decrease</button>
 /////////////6
