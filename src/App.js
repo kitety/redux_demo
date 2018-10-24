@@ -6,9 +6,25 @@ import { connect } from 'react-redux';
 import * as types from './actions'
 import { bindActionCreators } from "redux";
 //decrement increment 是函数
-
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return {
+    counter: state.counter,
+    name: state.user,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  // 从action导入多个
+  return bindActionCreators(types, dispatch)
+}
+@connect(mapStateToProps, mapDispatchToProps)
 class App extends Component {
   render() {
+    const propTypes = {
+      counter: PropTypes.number.isRequired,
+      increment: PropTypes.func.isRequired,
+      decrement: PropTypes.func.isRequired
+    }
     // 声明了mapDispatchToProps,在this.props中就取不到了
     // console.dir(this.props)
     const { increment, decrement } = this.props;
@@ -31,13 +47,13 @@ class App extends Component {
 // state 在这里代表了store.getState()
 // 这是个函数
 // state变到props中
-const mapStateToProps = (state) => {
-  // console.log(state);
-  return {
-    counter: state.counter,
-    name: state.user,
-  }
-}
+// const mapStateToProps = (state) => {
+//   // console.log(state);
+//   return {
+//     counter: state.counter,
+//     name: state.user,
+//   }
+// }
 //increment action中的函数,返回对象
 //incrementF 定义this.props中的函数
 // dispatch变到props中
@@ -70,16 +86,16 @@ const mapStateToProps = (state) => {
 //   return  bindActionCreators({increment},dispatch),
 // }
 // const mapDispatchToProps = (dispatch) => {
-// 从action导入多个
-//   return  bindActionCreators(types,dispatch),
+//   // 从action导入多个
+//   return bindActionCreators(types, dispatch)
 // }
-App.propTypes = {
-  counter: PropTypes.number.isRequired,
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired
-}
+// App.propTypes = {
+//   counter: PropTypes.number.isRequired,
+//   increment: PropTypes.func.isRequired,
+//   decrement: PropTypes.func.isRequired
+// }
 // 本组件直接使用
-export default connect(mapStateToProps, types)(App);
+export default App;
 //之前的
 //<button onClick={() => dispatch({ type: "DECREMENT" })} className="btn btn-danger my-2">Decrease</button>
 /////////////6
