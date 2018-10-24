@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { increment, decrement } from './actions'
+import { bindActionCreators } from "redux";
 //decrement increment 是函数
 
 class App extends Component {
   render() {
     // 声明了mapDispatchToProps,在this.props中就取不到了
-    console.dir(this.props)
+    // console.dir(this.props)
     const { incrementF, decrementF } = this.props;
 
     // const { dispatch } = this.props;
     // const dispatch=this.props.dispatch
-    console.dir(this.props);
     return (
       <div className="container">
         <h1 className="jumpbotron-heading text-center">{this.props.counter}</h1>
@@ -40,16 +40,26 @@ const mapStateToProps = (state) => {
 //incrementF 定义this.props中的函数
 // dispatch变到props中
 // 就是换一种方式,其实跟this.props.dispatch({type:xxx,name=xxx})差不多
+//第九课
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     incrementF: (name) => {
+//       dispatch(increment(name))
+//     },
+//     decrementF: (name) => {
+//       dispatch(decrement(name))
+//     }
+//   }
+// }
 const mapDispatchToProps = (dispatch) => {
   return {
-    incrementF: (name) => {
-      dispatch(increment(name))
-    },
-    decrementF: (name) => {
-      dispatch(decrement(name))
-    }
+    incrementF: bindActionCreators(increment, dispatch),
+    decrementF: bindActionCreators(decrement, dispatch),
   }
 }
+// const mapDispatchToProps = (dispatch) => {
+//   return  bindActionCreators({increment},dispatch),
+// }
 App.propTypes = {
   counter: PropTypes.number.isRequired
 }
