@@ -4,6 +4,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+
 import rootReducer from './reducer'
 // import { increment, decrement } from './actions';
 // 引入顶级组件
@@ -38,7 +40,7 @@ import { Provider } from 'react-redux';
 //   }
 // }
 
-const store = createStore(rootReducer, {}, applyMiddleware(logger))
+const store = createStore(rootReducer, {}, applyMiddleware(logger, thunk))
 // store.subscribe(() => console.log("State update!", store.getState()))
 // store.dispatch({
 //   type: 'INCREMENT'

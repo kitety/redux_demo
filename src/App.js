@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 // 导入多个
 import * as types from './actions'
 import { bindActionCreators } from "redux";
+import User from './components/user';
+
 //decrement increment 是函数
 const mapStateToProps = (state) => {
   // console.log(state);
@@ -25,6 +27,7 @@ class App extends Component {
       increment: PropTypes.func.isRequired,
       decrement: PropTypes.func.isRequired
     }
+    console.log(propTypes);
     // 声明了mapDispatchToProps,在this.props中就取不到了
     // console.dir(this.props)
     const { increment, decrement } = this.props;
@@ -34,11 +37,11 @@ class App extends Component {
     return (
       <div className="container">
         <h1 className="jumpbotron-heading text-center">{this.props.counter}</h1>
-        <h1 className="jumpbotron-heading text-center">{this.props.name}</h1>
         <p className="text-center">
           <button onClick={() => increment()} className="btn btn-primary mr-2">Increase</button>
           <button onClick={() => decrement()} className="btn btn-danger my-2">Decrease</button>
         </p>
+        <User />
       </div>
     );
   }

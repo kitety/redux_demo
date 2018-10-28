@@ -1,6 +1,10 @@
-const user = (state = "Hello", action = {}) => {
+import { FETCH_USER_SUCCESS } from '../constants';
+const user = (state = {}, action = {}) => {
   switch (action.type) {
-    default: return state
+    case FETCH_USER_SUCCESS:
+      return action.user
+    default:
+      return state
   }
 }
 export default user;
