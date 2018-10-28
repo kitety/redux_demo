@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
+import promise from 'redux-promise-middleware'
 
 import rootReducer from './reducer'
 // import { increment, decrement } from './actions';
@@ -40,7 +41,7 @@ import { Provider } from 'react-redux';
 //   }
 // }
 
-const store = createStore(rootReducer, {}, applyMiddleware(logger, thunk))
+const store = createStore(rootReducer, {}, applyMiddleware(logger, thunk, promise()))
 // store.subscribe(() => console.log("State update!", store.getState()))
 // store.dispatch({
 //   type: 'INCREMENT'

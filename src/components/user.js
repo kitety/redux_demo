@@ -8,15 +8,15 @@ class User extends Component {
     const { error, isFetching, user } = this.props.user;
     let data;
     if (error) {
-      data = error
+      data = error.message
     } else if (isFetching) {
       data = "Loading..."
     } else {
-      data = user.title
+      data = user.description
     }
     return (
       <div >
-        <h1 className="jumpbotron-heading text-center">{data}</h1>
+        <h3 className="jumpbotron-heading text-center">{data}</h3>
         <p className="text-center">
           <button onClick={() => { getUser() }} className="btn btn-success mr-2">GET RANDOM USER</button>
         </p>
