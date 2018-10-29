@@ -27,7 +27,7 @@ class App extends Component {
       increment: PropTypes.func.isRequired,
       decrement: PropTypes.func.isRequired
     }
-    console.log(propTypes);
+    // console.log(propTypes);
     // 声明了mapDispatchToProps,在this.props中就取不到了
     // console.dir(this.props)
     const { increment, decrement } = this.props;
@@ -51,7 +51,7 @@ class App extends Component {
 // 这是个函数
 // state变到props中
 // const mapStateToProps = (state) => {
-//   // console.log(state);
+  // console.log(state);
 //   return {
 //     counter: state.counter,
 //     name: state.user,

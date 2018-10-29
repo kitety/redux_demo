@@ -2,15 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, applyMiddleware } from 'redux'
-import logger from 'redux-logger'
-import thunk from 'redux-thunk'
-import promise from 'redux-promise-middleware'
-
-import rootReducer from './reducer'
 // import { increment, decrement } from './actions';
 // 引入顶级组件
 import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
 //index其实可以省略
 // 传递过来的是方法,因此要执行
 
@@ -41,7 +36,10 @@ import { Provider } from 'react-redux';
 //   }
 // }
 
-const store = createStore(rootReducer, {}, applyMiddleware(logger, thunk, promise()))
+
+// 区分环境之后的
+const store = configureStore()
+// const store = createStore(rootReducer, {}, composeWithDevTools(applyMiddleware(logger, thunk, promise())))
 // store.subscribe(() => console.log("State update!", store.getState()))
 // store.dispatch({
 //   type: 'INCREMENT'
