@@ -10,6 +10,14 @@ const configureStore = preloadedStore => {
     rootReducer,
     {},
     composeWithDevTools(applyMiddleware(logger, thunk, promise())))
+  if (process.env.NODE_ENV !== "production") {
+    if (module.hot) {
+      module.hot.accept('../reducer', () => {
+        store.replaceReducer(rootReducer)
+      })
+    }
+  }
+
   return store;
 }
 export default configureStore;

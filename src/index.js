@@ -53,6 +53,18 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root')
+    );
+
+  })
+}
 // ---redux版本---
 // const render = () => {
 //   ReactDOM.render(
